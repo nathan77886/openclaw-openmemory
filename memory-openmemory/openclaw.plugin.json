@@ -1,0 +1,73 @@
+{
+  "id": "memory-openmemory",
+  "name": "OpenMemory",
+  "description": "Long-term memory backend for OpenClaw powered by OpenMemory over HTTP.",
+  "kind": "memory",
+  "version": "1.0.0",
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "baseUrl": {
+        "type": "string",
+        "default": "http://127.0.0.1:8765",
+        "description": "Base URL of the OpenMemory HTTP backend."
+      },
+      "userId": {
+        "type": "string",
+        "default": "default-user",
+        "description": "User ID to associate memories with."
+      },
+      "apiKey": {
+        "type": "string",
+        "default": "",
+        "description": "Optional API key sent as a Bearer token."
+      },
+      "autoRecall": {
+        "type": "boolean",
+        "default": true,
+        "description": "Automatically inject relevant memories before each agent run."
+      },
+      "autoCapture": {
+        "type": "boolean",
+        "default": true,
+        "description": "Automatically capture a session summary when a new session starts."
+      },
+      "recallLimit": {
+        "type": "number",
+        "default": 5,
+        "description": "Maximum number of memories to inject per recall."
+      },
+      "captureMaxChars": {
+        "type": "number",
+        "default": 2000,
+        "description": "Maximum characters to include in a captured session summary."
+      },
+      "timeoutMs": {
+        "type": "number",
+        "default": 8000,
+        "description": "HTTP request timeout in milliseconds."
+      },
+      "searchPath": {
+        "type": "string",
+        "default": "/memories/search",
+        "description": "Endpoint path for memory search."
+      },
+      "storePath": {
+        "type": "string",
+        "default": "/memories",
+        "description": "Endpoint path for storing a memory."
+      },
+      "listPath": {
+        "type": "string",
+        "default": "/memories",
+        "description": "Endpoint path for listing memories."
+      },
+      "deletePathTemplate": {
+        "type": "string",
+        "default": "/memories/{id}",
+        "description": "Endpoint path template for deleting a memory. Use {id} as the placeholder."
+      }
+    },
+    "required": ["baseUrl", "userId"]
+  }
+}
