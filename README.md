@@ -36,7 +36,67 @@ OpenClaw 的长期记忆插件，通过 HTTP 对接 [OpenMemory](https://github.
 
 ## 安装
 
-将 `memory-openmemory` 目录放入 OpenClaw 的插件目录，OpenClaw 会自动加载 `openclaw.plugin.json` 并注册插件。
+### 1. 找到 OpenClaw 插件目录
+
+OpenClaw 的用户级插件目录位于：
+
+| 操作系统 | 插件目录路径 |
+|----------|-------------|
+| macOS / Linux | `~/.openclaw/plugins/` |
+| Windows | `%USERPROFILE%\.openclaw\plugins\` |
+
+如果该目录不存在，请先手动创建：
+
+```bash
+# macOS / Linux
+mkdir -p ~/.openclaw/plugins
+
+# Windows（PowerShell）
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.openclaw\plugins"
+```
+
+### 2. 将插件放入插件目录
+
+将本仓库中的 `memory-openmemory` 文件夹完整复制到 OpenClaw 插件目录下：
+
+```bash
+# macOS / Linux —— 将 memory-openmemory 目录复制到插件目录
+cp -r memory-openmemory ~/.openclaw/plugins/
+
+# 复制完成后，目录结构应如下所示：
+# ~/.openclaw/plugins/
+# └── memory-openmemory/
+#     ├── index.ts
+#     ├── openclaw.plugin.json
+#     └── package.json
+```
+
+```powershell
+# Windows（PowerShell）
+Copy-Item -Recurse memory-openmemory "$env:USERPROFILE\.openclaw\plugins\"
+```
+
+### 3. 重启 OpenClaw
+
+重启 OpenClaw 后，它会自动扫描插件目录、加载 `openclaw.plugin.json` 并完成插件注册。
+
+> **提示**：如果 OpenClaw 支持 `openclaw plugins list` 命令，可执行该命令确认 `memory-openmemory` 已出现在已加载插件列表中。
+
+---
+
+## 让 OpenClaw 自动安装本插件（提示词）
+
+你可以直接将以下提示词发送给 OpenClaw，让它自动完成安装：
+
+```
+请帮我安装 memory-openmemory 插件。步骤如下：
+1. 确认当前操作系统，找到 OpenClaw 插件目录（macOS/Linux 为 ~/.openclaw/plugins/，Windows 为 %USERPROFILE%\.openclaw\plugins\）。
+2. 如果插件目录不存在，先创建它。
+3. 将 memory-openmemory 文件夹（包含 index.ts、openclaw.plugin.json、package.json 三个文件）复制到上述插件目录中。
+4. 完成后告知我插件已就绪，并提示我重启 OpenClaw 以使插件生效。
+```
+
+> **说明**：OpenClaw 拥有文件系统操作能力，可执行上述步骤自动完成安装。若需要同时配置 `baseUrl`、`userId` 等参数，也可在提示词中一并说明。
 
 ---
 
