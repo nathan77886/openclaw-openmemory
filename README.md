@@ -84,19 +84,11 @@ Copy-Item -Recurse memory-openmemory "$env:USERPROFILE\.openclaw\plugins\"
 
 ---
 
-## 让 OpenClaw 自动安装本插件（提示词）
+## 让 OpenClaw 自动安装本插件
 
-你可以直接将以下提示词发送给 OpenClaw，让它自动完成安装：
+不想手动操作终端？直接把提示词发给 OpenClaw，让它帮你完成安装。
 
-```
-请帮我安装 memory-openmemory 插件。步骤如下：
-1. 确认当前操作系统，找到 OpenClaw 插件目录（macOS/Linux 为 ~/.openclaw/plugins/，Windows 为 %USERPROFILE%\.openclaw\plugins\）。
-2. 如果插件目录不存在，先创建它。
-3. 将 memory-openmemory 文件夹（包含 index.ts、openclaw.plugin.json、package.json 三个文件）复制到上述插件目录中。
-4. 完成后告知我插件已就绪，并提示我重启 OpenClaw 以使插件生效。
-```
-
-> **说明**：OpenClaw 拥有文件系统操作能力，可执行上述步骤自动完成安装。若需要同时配置 `baseUrl`、`userId` 等参数，也可在提示词中一并说明。
+👉 提示词见 **[INSTALL_PROMPT.md](./INSTALL_PROMPT.md)**，其中包含「基础安装」和「安装 + 同步写入配置」两个版本。
 
 ---
 
