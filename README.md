@@ -29,7 +29,7 @@ OpenClaw 的长期记忆插件，通过 HTTP 对接 [OpenMemory](https://github.
 
 ## 前置要求
 
-- 已部署并运行的 [OpenMemory](https://github.com/mem0ai/mem0) HTTP 后端（默认监听 `http://127.0.0.1:8765`）。
+- 已部署并运行的 [OpenMemory](https://github.com/mem0ai/mem0) HTTP 后端（默认监听 `http://127.0.0.1:8080`）。
 - OpenClaw 宿主环境（支持 `registerTool` / `registerHook` API）。
 
 ---
@@ -98,7 +98,7 @@ Copy-Item -Recurse memory-openmemory "$env:USERPROFILE\.openclaw\plugins\"
 
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `baseUrl` | `string` | `http://127.0.0.1:8765` | OpenMemory HTTP 后端的基础 URL（**必填**） |
+| `baseUrl` | `string` | `http://127.0.0.1:8080` | OpenMemory HTTP 后端的基础 URL（**必填**） |
 | `userId` | `string` | `default-user` | 记忆所关联的用户 ID（**必填**） |
 | `apiKey` | `string` | `""` | 可选的 API Key，以 `Bearer` Token 方式发送 |
 | `autoRecall` | `boolean` | `true` | 是否在每次 Agent 运行前自动注入相关记忆 |
@@ -106,10 +106,10 @@ Copy-Item -Recurse memory-openmemory "$env:USERPROFILE\.openclaw\plugins\"
 | `recallLimit` | `number` | `5` | 每次自动召回最多注入的记忆条数 |
 | `captureMaxChars` | `number` | `2000` | 捕获会话摘要时的最大字符数 |
 | `timeoutMs` | `number` | `8000` | HTTP 请求超时时间（毫秒） |
-| `searchPath` | `string` | `/memories/search` | 记忆搜索接口路径 |
-| `storePath` | `string` | `/memories` | 记忆存储接口路径 |
-| `listPath` | `string` | `/memories` | 记忆列表接口路径 |
-| `deletePathTemplate` | `string` | `/memories/{id}` | 记忆删除接口路径模板，`{id}` 为占位符 |
+| `searchPath` | `string` | `/api/memory/search` | 记忆搜索接口路径 |
+| `storePath` | `string` | `/api/memory` | 记忆存储接口路径 |
+| `listPath` | `string` | `/api/memory` | 记忆列表接口路径 |
+| `deletePathTemplate` | `string` | `/api/memory/{id}` | 记忆删除接口路径模板，`{id}` 为占位符 |
 
 ---
 
@@ -161,7 +161,7 @@ Copy-Item -Recurse memory-openmemory "$env:USERPROFILE\.openclaw\plugins\"
 | 钩子事件 | 触发条件 | 行为 |
 |----------|----------|------|
 | `agent:before-run` | 每次 Agent 执行前 | 检索与最新用户消息相关的记忆，以 `<relevant-memories>` XML 块注入到 `system` 消息（需启用 `autoRecall`） |
-| `command:new` | 每次新建对话/会话时 | 将当前会话内容摘要存储到 OpenMemory（需启用 `autoCapture`） |
+| `command:new` / `command:reset` | 每次新建或重置对话/会话时 | 将当前会话内容摘要存储到 OpenMemory（需启用 `autoCapture`） |
 
 ---
 

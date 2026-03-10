@@ -54,7 +54,7 @@ interface Message {
 // ---------------------------------------------------------------------------
 
 const CONFIG_DEFAULTS: Required<PluginConfig> = {
-  baseUrl: "http://127.0.0.1:8765",
+  baseUrl: "http://127.0.0.1:8080",
   userId: "default-user",
   apiKey: "",
   autoRecall: true,
@@ -62,10 +62,10 @@ const CONFIG_DEFAULTS: Required<PluginConfig> = {
   recallLimit: 5,
   captureMaxChars: 2000,
   timeoutMs: 8000,
-  searchPath: "/memories/search",
-  storePath: "/memories",
-  listPath: "/memories",
-  deletePathTemplate: "/memories/{id}",
+  searchPath: "/api/memory/search",
+  storePath: "/api/memory",
+  listPath: "/api/memory",
+  deletePathTemplate: "/api/memory/{id}",
 };
 
 // ---------------------------------------------------------------------------
@@ -473,7 +473,7 @@ function registerHooks(
 
   // Auto-capture: save session summary when a new session is created
   if (config.autoCapture) {
-    api.registerHook("command:new", async (ctx: unknown) => {
+    const captureHandler = async (ctx: unknown) => {
       try {
         const context = ctx as { messages?: Message[]; session?: { messages?: Message[] } };
         const messages: Message[] =
@@ -495,7 +495,10 @@ function registerHooks(
       } catch (err: unknown) {
         api.logger?.warn?.(`[memory-openmemory] auto-capture error: ${String(err)}`);
       }
-    });
+    };
+
+    api.registerHook("command:new", captureHandler);
+    api.registerHook("command:reset", captureHandler);
   }
 }
 

@@ -9,7 +9,7 @@
     "properties": {
       "baseUrl": {
         "type": "string",
-        "default": "http://127.0.0.1:8765",
+        "default": "http://127.0.0.1:8080",
         "description": "Base URL of the OpenMemory HTTP backend."
       },
       "userId": {
@@ -49,22 +49,22 @@
       },
       "searchPath": {
         "type": "string",
-        "default": "/memories/search",
+        "default": "/api/memory/search",
         "description": "Endpoint path for memory search."
       },
       "storePath": {
         "type": "string",
-        "default": "/memories",
+        "default": "/api/memory",
         "description": "Endpoint path for storing a memory."
       },
       "listPath": {
         "type": "string",
-        "default": "/memories",
+        "default": "/api/memory",
         "description": "Endpoint path for listing memories."
       },
       "deletePathTemplate": {
         "type": "string",
-        "default": "/memories/{id}",
+        "default": "/api/memory/{id}",
         "description": "Endpoint path template for deleting a memory. Use {id} as the placeholder."
       }
     },

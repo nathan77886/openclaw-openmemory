@@ -36,7 +36,7 @@
      "memory-openmemory": {
        "enabled": true,
        "config": {
-         "baseUrl": "<OpenMemory 后端地址，例如 http://127.0.0.1:8765>",
+         "baseUrl": "<OpenMemory 后端地址，例如 http://127.0.0.1:8080>",
          "userId": "<你的用户 ID，例如 alice>"
        }
      }
